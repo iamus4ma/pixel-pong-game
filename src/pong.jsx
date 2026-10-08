@@ -82,6 +82,17 @@ function Pong() {
   const wordRef = useRef('IAMUSAMA');
   const [customWord, setCustomWord] = useState('');
   const [totalPixels, setTotalPixels] = useState(0);
+  const [speed, setSpeed] = useState(2);
+  const speedRef = useRef(2);
+
+  const changeSpeed = (next) => {
+    const ball = ballRef.current;
+    const ratio = next / speedRef.current;
+    ball.dx *= ratio;
+    ball.dy *= ratio;
+    speedRef.current = next;
+    setSpeed(next);
+  };
 
   const startGame = (word) => {
     if (word) wordRef.current = word;
@@ -125,7 +136,7 @@ function Pong() {
     const initializeGame = () => {
       const scale = scaleRef.current;
       const LARGE_PIXEL_SIZE = 8 * scale;
-      const BALL_SPEED = Math.max(3, 5 * scale);
+      const BALL_SPEED = Math.max(3, 5 * scale) * speedRef.current / 2;
 
       pixelsRef.current = [];
       const word = wordRef.current;
@@ -330,10 +341,15 @@ function Pong() {
       ref={canvasRef}
       aria-label="Pixel Pong playing field"
     />
-    <div className="hud"><span>PIXEL PONG</span><span>PIXELS {score}/{totalPixels} · LIVES {lives}</span></div>
+    <div className="hud"><span>PIXEL PONG</span><span>PIXELS {score}/{totalPixels} · LIVES {lives} · SPEED {speed}</span></div>
     {status !== 'playing' && <div className="game-overlay">
       <h1>{status === 'won' ? 'YOU WIN' : status === 'lost' ? 'GAME OVER' : status === 'paused' ? 'PAUSED' : 'PIXEL PONG'}</h1>
       <p>{status === 'menu' || status === 'ready' ? 'Clear every pixel. Keep the ball in play.' : status === 'paused' ? 'Take a breath.' : `You cleared ${score} pixels.`}</p>
+      {(status === 'menu' || status === 'paused') && <div className="speed-control">
+        <label htmlFor="ball-speed">BALL SPEED: {speed}</label>
+        <input id="ball-speed" type="range" min="1" max="5" step="1" value={speed} onChange={(event) => changeSpeed(Number(event.target.value))} />
+        <span>SLOW <span>NORMAL</span> VERY FAST</span>
+      </div>}
       {status === 'menu' && <form onSubmit={(event) => {
         event.preventDefault();
         if (customWord) startGame(customWord);

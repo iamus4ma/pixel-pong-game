@@ -10,6 +10,9 @@
 .game button:disabled { opacity: .4; cursor: not-allowed; }
 .game-overlay form { display: flex; flex-direction: column; gap: 12px; width: min(100%, 300px); }
 .game-overlay label { font-size: 12px; letter-spacing: 2px; }
-.game-overlay input { box-sizing: border-box; width: 100%; padding: 12px; border: 2px solid #fff; background: #000; color: #fff; text-align: center; font: bold 16px 'Courier New', monospace; }
+.game-overlay input[type="text"], .game-overlay input:not([type]) { box-sizing: border-box; width: 100%; padding: 12px; border: 2px solid #fff; background: #000; color: #fff; text-align: center; font: bold 16px 'Courier New', monospace; }
+.speed-control { width: min(100%, 300px); display: flex; flex-direction: column; gap: 8px; font-size: 12px; letter-spacing: 1px; }
+.speed-control input { width: 100%; accent-color: #fff; }
+.speed-control > span { display: flex; justify-content: space-between; color: #aaa; font-size: 10px; }
 .game-controls { position: absolute; right: 24px; bottom: 20px; display: flex; gap: 8px; }
 @media (max-width: 600px) { .hud { font-size: 10px; left: 12px; right: 12px; } }

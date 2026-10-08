@@ -1,38 +1,15 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+.game { position: fixed; inset: 0; background: #000; color: #fff; font-family: 'Courier New', monospace; }
+.game canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; }
+.hud { position: absolute; top: 20px; left: 24px; right: 24px; display: flex; justify-content: space-between; gap: 16px; font-size: 13px; letter-spacing: 2px; pointer-events: none; }
+.game-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; background: #000c; text-align: center; padding: 24px; }
+.game-overlay h1 { margin: 0; font-size: clamp(36px, 8vw, 90px); letter-spacing: .08em; }
+.game-overlay p { margin: 0; font-size: 16px; }
+.game-overlay small { max-width: 300px; line-height: 1.6; color: #aaa; }
+.game button { border: 2px solid #fff; background: #fff; color: #000; padding: 12px 22px; font: bold 14px 'Courier New', monospace; cursor: pointer; }
+.game button:hover, .game button:focus-visible { background: #000; color: #fff; }
+.game button:disabled { opacity: .4; cursor: not-allowed; }
+.game-overlay form { display: flex; flex-direction: column; gap: 12px; width: min(100%, 300px); }
+.game-overlay label { font-size: 12px; letter-spacing: 2px; }
+.game-overlay input { box-sizing: border-box; width: 100%; padding: 12px; border: 2px solid #fff; background: #000; color: #fff; text-align: center; font: bold 16px 'Courier New', monospace; }
+.game-controls { position: absolute; right: 24px; bottom: 20px; display: flex; gap: 8px; }
+@media (max-width: 600px) { .hud { font-size: 10px; left: 12px; right: 12px; } }
